@@ -98,5 +98,5 @@ module "retool_api_jobs_runner" {
     "run.googleapis.com/cloudsql-instances" = module.retool_database.instance_connection_name
   }
 
-  depends_on = [time_sleep.wait_apis_and_services]
+  depends_on = [time_sleep.wait_activate_apis]
 }

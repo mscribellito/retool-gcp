@@ -1,25 +1,25 @@
 // General GCP
 
 variable "project_id" {
-  type = string
-  description = "The project ID to create the resources in."
+  type        = string
+  description = "The project ID to deploy in."
 }
 
 variable "region" {
-  type    = string
-  description = "The region of the resources."
-  default = "us-east1"
+  type        = string
+  description = "The region of the deployment."
+  default     = "us-east1"
 }
 
 variable "zone" {
-  type    = string
-  description = "The zone of the resources."
-  default = "us-east1-b"
+  type        = string
+  description = "The zone of the deployment."
+  default     = "us-east1-b"
 }
 
-variable "apis_and_services" {
+variable "activate_apis" {
   type        = list(string)
-  description = "Required APIs & services"
+  description = "The list of APIs & services to activate within the project."
   default = [
     "compute.googleapis.com",
     "run.googleapis.com",

@@ -1,16 +1,16 @@
 // Enable necessary APIs & services
 
-resource "google_project_service" "apis_and_services" {
-  for_each = toset(var.apis_and_services)
+resource "google_project_service" "activate_apis" {
+  for_each = toset(var.activate_apis)
 
   project = var.project_id
   service = each.value
 }
 
-resource "time_sleep" "wait_apis_and_services" {
-  create_duration = "60s"
+resource "time_sleep" "wait_activate_apis" {
+  create_duration = "120s"
 
-  depends_on = [google_project_service.apis_and_services]
+  depends_on = [google_project_service.activate_apis]
 }
 
 locals {

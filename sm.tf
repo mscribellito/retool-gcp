@@ -47,7 +47,7 @@ module "retool_secrets" {
     }
   ]
 
-  depends_on = [time_sleep.wait_apis_and_services]
+  depends_on = [time_sleep.wait_activate_apis]
 }
 
 data "google_secret_manager_secret_version" "retool_database_password" {

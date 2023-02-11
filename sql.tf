@@ -41,10 +41,12 @@ module "retool_database" {
 
   create_timeout = "30m"
 
-  depends_on = [time_sleep.wait_apis_and_services]
+  depends_on = [time_sleep.wait_activate_apis]
 }
 
 resource "google_sql_user" "retool_database_user" {
+  project = var.project_id
+
   instance = module.retool_database.instance_name
 
   name     = local.database_user
