@@ -1,3 +1,5 @@
+// General GCP
+
 variable "project_id" {
   type = string
 }
@@ -13,7 +15,8 @@ variable "zone" {
 }
 
 variable "apis_and_services" {
-  type = list(string)
+  type        = list(string)
+  description = "Required APIs & services"
   default = [
     "compute.googleapis.com",
     "run.googleapis.com",
@@ -21,6 +24,36 @@ variable "apis_and_services" {
     "sqladmin.googleapis.com",
   ]
 }
+
+// Cloud SQL
+
+variable "database_version" {
+  type        = string
+  description = "The database version to use."
+  default     = "POSTGRES_11"
+}
+
+variable "database_tier" {
+  type        = string
+  description = "The machine type for the database instance."
+  default     = "db-custom-1-3840"
+}
+
+// Cloud Run
+
+variable "service_cpu" {
+  type        = string
+  description = "Number of vCPUs allocated to each container instance."
+  default     = "1000m"
+}
+
+variable "service_memory" {
+  type        = string
+  description = "Memory to allocate to each container instance."
+  default     = "2Gi"
+}
+
+// Artifact Registry
 
 variable "repository_name" {
   type        = string
@@ -33,6 +66,8 @@ variable "image_name" {
   description = "Artifact Registry container image name for Retool."
   default     = "backend"
 }
+
+// Retool Specific
 
 variable "retool_version" {
   type        = string

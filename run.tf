@@ -1,3 +1,5 @@
+// Create api & jobs-runner service
+
 module "retool_api_jobs_runner" {
   source  = "GoogleCloudPlatform/cloud-run/google"
   version = "0.4.0"
@@ -16,7 +18,7 @@ module "retool_api_jobs_runner" {
     },
     {
       name  = "POSTGRES_DB"
-      value = "hammerhead_production"
+      value = local.database_name
     },
     {
       name  = "POSTGRES_HOST"
@@ -32,7 +34,7 @@ module "retool_api_jobs_runner" {
     },
     {
       name  = "POSTGRES_USER"
-      value = "retool"
+      value = local.database_user
     }
   ]
   env_secret_vars = [
@@ -40,7 +42,7 @@ module "retool_api_jobs_runner" {
       name = "POSTGRES_PASSWORD"
       value_from = [{
         secret_key_ref = {
-          name = "retool-database-password"
+          name = local.secret_database_password
           key  = "latest"
         }
       }]
@@ -49,7 +51,7 @@ module "retool_api_jobs_runner" {
       name = "JWT_SECRET"
       value_from = [{
         secret_key_ref = {
-          name = "retool-jwt-secret"
+          name = local.secret_jwt_secret
           key  = "latest"
         }
       }]
@@ -58,7 +60,7 @@ module "retool_api_jobs_runner" {
       name = "ENCRYPTION_KEY"
       value_from = [{
         secret_key_ref = {
-          name = "retool-encryption-key"
+          name = local.secret_encryption_key
           key  = "latest"
         }
       }]
@@ -67,7 +69,7 @@ module "retool_api_jobs_runner" {
       name = "LICENSE_KEY"
       value_from = [{
         secret_key_ref = {
-          name = "retool-license-key"
+          name = local.secret_license_key
           key  = "latest"
         }
       }]
@@ -79,8 +81,8 @@ module "retool_api_jobs_runner" {
   ]
 
   limits = {
-    cpu    = "1000m"
-    memory = "2Gi"
+    cpu    = var.service_cpu
+    memory = var.service_memory
   }
   members = ["allUsers"]
   ports = {

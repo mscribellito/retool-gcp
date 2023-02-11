@@ -1,17 +1,19 @@
+// Create storage database
+
 module "retool_database" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "14.0.0"
 
   name             = "retool"
-  database_version = "POSTGRES_11"
+  database_version = var.database_version
   project_id       = var.project_id
   zone             = var.zone
   region           = var.region
-  tier             = "db-custom-1-3840"
+  tier             = var.database_tier
 
   additional_databases = [
     {
-      name      = "hammerhead_production"
+      name      = local.database_name
       charset   = "UTF8"
       collation = "en_US.UTF8"
     }
@@ -38,11 +40,13 @@ module "retool_database" {
   }
 
   create_timeout = "30m"
+
+  depends_on = [time_sleep.wait_apis_and_services]
 }
 
 resource "google_sql_user" "retool_database_user" {
   instance = module.retool_database.instance_name
 
-  name     = "retool"
+  name     = local.database_user
   password = data.google_secret_manager_secret_version.retool_database_password.secret_data
 }

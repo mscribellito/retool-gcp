@@ -16,7 +16,7 @@ resource "random_password" "jwt_secret" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
-// database password, JWT secret, encryption key & license key
+// Create secrets database password, JWT secret, encryption key & license key
 
 module "retool_secrets" {
   source  = "GoogleCloudPlatform/secret-manager/google"
@@ -26,32 +26,34 @@ module "retool_secrets" {
 
   secrets = [
     {
-      name                  = "retool-database-password"
+      name                  = local.secret_database_password
       automatic_replication = true
       secret_data           = random_password.password.result
     },
     {
-      name                  = "retool-jwt-secret"
+      name                  = local.secret_jwt_secret
       automatic_replication = true
       secret_data           = random_password.jwt_secret.result
     },
     {
-      name                  = "retool-encryption-key"
+      name                  = local.secret_encryption_key
       automatic_replication = true
       secret_data           = random_password.encryption_key.result
     },
     {
-      name                  = "retool-license-key"
+      name                  = local.secret_license_key
       automatic_replication = true
       secret_data           = var.retool_license_key
     }
   ]
+
+  depends_on = [time_sleep.wait_apis_and_services]
 }
 
 data "google_secret_manager_secret_version" "retool_database_password" {
   project = var.project_id
 
-  secret = "retool-database-password"
+  secret = local.secret_database_password
 
   depends_on = [module.retool_secrets]
 }
