@@ -2,15 +2,18 @@
 
 variable "project_id" {
   type = string
+  description = "The project ID to create the resources in."
 }
 
 variable "region" {
   type    = string
+  description = "The region of the resources."
   default = "us-east1"
 }
 
 variable "zone" {
   type    = string
+  description = "The zone of the resources."
   default = "us-east1-b"
 }
 

@@ -51,14 +51,14 @@
 | <a name="input_database_tier"></a> [database\_tier](#input\_database\_tier) | The machine type for the database instance. | `string` | `"db-custom-1-3840"` | no |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version) | The database version to use. | `string` | `"POSTGRES_11"` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Artifact Registry container image name for Retool. | `string` | `"backend"` | no |
-| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | n/a | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | n/a | `string` | `"us-east1"` | no |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project ID to create the resources in. | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region of the resources. | `string` | `"us-east1"` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Artifact Registry repository name. | `string` | `"retool"` | no |
 | <a name="input_retool_license_key"></a> [retool\_license\_key](#input\_retool\_license\_key) | Retool license key. | `string` | `"EXPIRED-LICENSE-KEY-TRIAL"` | no |
 | <a name="input_retool_version"></a> [retool\_version](#input\_retool\_version) | Retool version number. | `string` | n/a | yes |
 | <a name="input_service_cpu"></a> [service\_cpu](#input\_service\_cpu) | Number of vCPUs allocated to each container instance. | `string` | `"1000m"` | no |
 | <a name="input_service_memory"></a> [service\_memory](#input\_service\_memory) | Memory to allocate to each container instance. | `string` | `"2Gi"` | no |
-| <a name="input_zone"></a> [zone](#input\_zone) | n/a | `string` | `"us-east1-b"` | no |
+| <a name="input_zone"></a> [zone](#input\_zone) | The zone of the resources. | `string` | `"us-east1-b"` | no |
 
 ## Outputs
 
