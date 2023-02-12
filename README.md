@@ -48,7 +48,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_activate_apis"></a> [activate\_apis](#input\_activate\_apis) | The list of APIs & services to activate within the project. | `list(string)` | <pre>[<br>  "compute.googleapis.com",<br>  "run.googleapis.com",<br>  "secretmanager.googleapis.com",<br>  "sqladmin.googleapis.com"<br>]</pre> | no |
-| <a name="input_database_tier"></a> [database\_tier](#input\_database\_tier) | The machine type for the database instance. | `string` | `"db-custom-1-3840"` | no |
+| <a name="input_database_tier"></a> [database\_tier](#input\_database\_tier) | The machine type for the database instance. | `string` | `"db-f1-micro"` | no |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version) | The database version to use. | `string` | `"POSTGRES_11"` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Artifact Registry container image name for Retool. | `string` | `"backend"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project ID to deploy in. | `string` | n/a | yes |
