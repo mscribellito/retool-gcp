@@ -91,7 +91,7 @@ module "retool_api_jobs_runner" {
   }
   service_account_email = module.retool_service_account.email
   template_annotations = {
-    "autoscaling.knative.dev/minScale"      = 1
+    "autoscaling.knative.dev/minScale"      = 0
     "autoscaling.knative.dev/maxScale"      = 1
     "generated-by"                          = "terraform"
     "run.googleapis.com/client-name"        = "terraform"

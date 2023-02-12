@@ -39,7 +39,7 @@ variable "database_version" {
 variable "database_tier" {
   type        = string
   description = "The machine type for the database instance."
-  default     = "db-custom-1-3840"
+  default     = "db-f1-micro"
 }
 
 // Cloud Run

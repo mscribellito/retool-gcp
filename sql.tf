@@ -19,13 +19,6 @@ module "retool_database" {
     }
   ]
 
-  database_flags = [
-    {
-      name  = "max_connections"
-      value = "300"
-    }
-  ]
-
   enable_default_db   = false
   enable_default_user = false
 
