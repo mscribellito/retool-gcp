@@ -2,11 +2,20 @@
 
 [Self-hosted Retool](https://retool.com/self-hosted/) deployment on GCP backed by Cloud Run and SQL. Based on [examples from Retool](https://github.com/tryretool/retool-onpremise) and their [documentation](https://docs.retool.com/docs/self-hosted).
 
-## Prerequisites
+The purpose of this project is to run self-hosted Retool as cheap as possible in the cloud. This *is not intended for production use*, however, this code could serve as a base for a hardened deployment.
 
-* `artifactregistry.googleapis.com` API enabled.
-* Artifact Registry repository named `retool`.
-* [tryretool/backend](https://hub.docker.com/r/tryretool/backend) image pushed as `backend:<version-number>`
+## Deployment Steps
+
+* Create a project with **artifactregistry.googleapis.com** API enabled.
+* Create an Artifact Registry repository named `retool`.
+* Push the [tryretool/backend](https://hub.docker.com/r/tryretool/backend) image as `backend:<version-number>`.
+* Create **terraform.tfvars** file with required variables.
+* Run `terraform apply`.
+* Execute **retool-jobs-runner** Cloud Run job to apply database migrations.
+
+## Known Issues
+
+* The **retool-jobs-runner** job will show as failed due to the fact Cloud Run jobs are not designed to be long-running. The main purpose of this job is to run database migrations. After migrations are applied, the container will continue to run. You can verifiy the migrations have successfully run by searching the logs for `Database migrations are up to date.`. 
 
 ## Requirements
 
@@ -50,11 +59,12 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_activate_apis"></a> [activate\_apis](#input\_activate\_apis) | The list of APIs & services to activate within the project. | `list(string)` | <pre>[<br>  "compute.googleapis.com",<br>  "run.googleapis.com",<br>  "secretmanager.googleapis.com",<br>  "sqladmin.googleapis.com"<br>]</pre> | no |
 | <a name="input_api_cpu"></a> [api\_cpu](#input\_api\_cpu) | Number of vCPUs allocated to each api container instance. | `string` | `"1000m"` | no |
-| <a name="input_api_max_instances"></a> [api\_max\_instances](#input\_api\_max\_instances) | Maximum number of api container instances | `number` | `1` | no |
+| <a name="input_api_max_instances"></a> [api\_max\_instances](#input\_api\_max\_instances) | Maximum number of api container instances. | `number` | `1` | no |
 | <a name="input_api_memory"></a> [api\_memory](#input\_api\_memory) | Memory to allocate to each api container instance. | `string` | `"2Gi"` | no |
-| <a name="input_api_min_instances"></a> [api\_min\_instances](#input\_api\_min\_instances) | Minimum number of api container instances | `number` | `0` | no |
+| <a name="input_api_min_instances"></a> [api\_min\_instances](#input\_api\_min\_instances) | Minimum number of api container instances. | `number` | `0` | no |
 | <a name="input_database_tier"></a> [database\_tier](#input\_database\_tier) | The machine type for the database instance. | `string` | `"db-f1-micro"` | no |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version) | The database version to use. | `string` | `"POSTGRES_11"` | no |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Verified domain name to map to api service. | `string` | `null` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Artifact Registry container image name for Retool. | `string` | `"backend"` | no |
 | <a name="input_jobs_runner_cpu"></a> [jobs\_runner\_cpu](#input\_jobs\_runner\_cpu) | Number of vCPUs allocated to the jobs-runner container instance. | `string` | `"1000m"` | no |
 | <a name="input_jobs_runner_memory"></a> [jobs\_runner\_memory](#input\_jobs\_runner\_memory) | Memory to allocate to the jobs-runner container instance. | `string` | `"2Gi"` | no |

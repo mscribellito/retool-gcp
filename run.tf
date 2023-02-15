@@ -54,6 +54,8 @@ module "retool_api" {
     "run.googleapis.com/cloudsql-instances" = module.retool_database.instance_connection_name
   }
 
+  verified_domain_name = var.domain_name != null ? [var.domain_name] : []
+
   depends_on = [time_sleep.wait_activate_apis]
 }
 

@@ -58,14 +58,20 @@ variable "api_memory" {
 
 variable "api_min_instances" {
   type        = number
-  description = "Minimum number of api container instances"
+  description = "Minimum number of api container instances."
   default     = 0
 }
 
 variable "api_max_instances" {
   type        = number
-  description = "Maximum number of api container instances"
+  description = "Maximum number of api container instances."
   default     = 1
+}
+
+variable "domain_name" {
+  type        = string
+  description = "Verified domain name to map to api service."
+  default     = null
 }
 
 variable "jobs_runner_cpu" {
