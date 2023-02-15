@@ -2,6 +2,8 @@
 
 [Self-hosted Retool](https://retool.com/self-hosted/) deployment on GCP backed by Cloud Run and SQL. Based on [examples from Retool](https://github.com/tryretool/retool-onpremise) and their [documentation](https://docs.retool.com/docs/self-hosted).
 
+![Architecture](architecture.png)
+
 The purpose of this project is to run self-hosted Retool as cheap as possible in the cloud. This *is not intended for production use*, however, this code could serve as a base for a hardened deployment.
 
 ## Deployment Steps
