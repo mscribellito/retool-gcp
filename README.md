@@ -49,16 +49,20 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_activate_apis"></a> [activate\_apis](#input\_activate\_apis) | The list of APIs & services to activate within the project. | `list(string)` | <pre>[<br>  "compute.googleapis.com",<br>  "run.googleapis.com",<br>  "secretmanager.googleapis.com",<br>  "sqladmin.googleapis.com"<br>]</pre> | no |
+| <a name="input_api_cpu"></a> [api\_cpu](#input\_api\_cpu) | Number of vCPUs allocated to each api container instance. | `string` | `"1000m"` | no |
+| <a name="input_api_max_instances"></a> [api\_max\_instances](#input\_api\_max\_instances) | Maximum number of api container instances | `number` | `1` | no |
+| <a name="input_api_memory"></a> [api\_memory](#input\_api\_memory) | Memory to allocate to each api container instance. | `string` | `"2Gi"` | no |
+| <a name="input_api_min_instances"></a> [api\_min\_instances](#input\_api\_min\_instances) | Minimum number of api container instances | `number` | `0` | no |
 | <a name="input_database_tier"></a> [database\_tier](#input\_database\_tier) | The machine type for the database instance. | `string` | `"db-f1-micro"` | no |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version) | The database version to use. | `string` | `"POSTGRES_11"` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Artifact Registry container image name for Retool. | `string` | `"backend"` | no |
+| <a name="input_jobs_runner_cpu"></a> [jobs\_runner\_cpu](#input\_jobs\_runner\_cpu) | Number of vCPUs allocated to the jobs-runner container instance. | `string` | `"1000m"` | no |
+| <a name="input_jobs_runner_memory"></a> [jobs\_runner\_memory](#input\_jobs\_runner\_memory) | Memory to allocate to the jobs-runner container instance. | `string` | `"2Gi"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project ID to deploy in. | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region of the deployment. | `string` | `"us-east1"` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Artifact Registry repository name. | `string` | `"retool"` | no |
 | <a name="input_retool_license_key"></a> [retool\_license\_key](#input\_retool\_license\_key) | Retool license key. | `string` | `"EXPIRED-LICENSE-KEY-TRIAL"` | no |
 | <a name="input_retool_version"></a> [retool\_version](#input\_retool\_version) | Retool version number. | `string` | n/a | yes |
-| <a name="input_service_cpu"></a> [service\_cpu](#input\_service\_cpu) | Number of vCPUs allocated to each container instance. | `string` | `"1000m"` | no |
-| <a name="input_service_memory"></a> [service\_memory](#input\_service\_memory) | Memory to allocate to each container instance. | `string` | `"2Gi"` | no |
 | <a name="input_zone"></a> [zone](#input\_zone) | The zone of the deployment. | `string` | `"us-east1-b"` | no |
 
 ## Outputs

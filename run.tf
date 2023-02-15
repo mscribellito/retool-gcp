@@ -38,8 +38,8 @@ module "retool_api" {
   }
 
   limits = {
-    cpu    = var.service_cpu
-    memory = var.service_memory
+    cpu    = var.api_cpu
+    memory = var.api_memory
   }
 
   members = ["allUsers"]
@@ -47,8 +47,8 @@ module "retool_api" {
   service_account_email = module.retool_service_account.email
 
   template_annotations = {
-    "autoscaling.knative.dev/minScale"      = 0
-    "autoscaling.knative.dev/maxScale"      = 1
+    "autoscaling.knative.dev/minScale"      = var.api_min_instances
+    "autoscaling.knative.dev/maxScale"      = var.api_max_instances
     "generated-by"                          = "terraform"
     "run.googleapis.com/client-name"        = "terraform"
     "run.googleapis.com/cloudsql-instances" = module.retool_database.instance_connection_name
@@ -104,8 +104,8 @@ resource "google_cloud_run_v2_job" "retool_jobs_runner" {
 
         resources {
           limits = {
-            cpu    = var.service_cpu
-            memory = var.service_memory
+            cpu    = var.jobs_runner_cpu
+            memory = var.jobs_runner_memory
           }
         }
 
@@ -129,4 +129,6 @@ resource "google_cloud_run_v2_job" "retool_jobs_runner" {
     }
 
   }
+
+  depends_on = [time_sleep.wait_activate_apis]
 }

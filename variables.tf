@@ -44,15 +44,39 @@ variable "database_tier" {
 
 // Cloud Run
 
-variable "service_cpu" {
+variable "api_cpu" {
   type        = string
-  description = "Number of vCPUs allocated to each container instance."
+  description = "Number of vCPUs allocated to each api container instance."
   default     = "1000m"
 }
 
-variable "service_memory" {
+variable "api_memory" {
   type        = string
-  description = "Memory to allocate to each container instance."
+  description = "Memory to allocate to each api container instance."
+  default     = "2Gi"
+}
+
+variable "api_min_instances" {
+  type        = number
+  description = "Minimum number of api container instances"
+  default     = 0
+}
+
+variable "api_max_instances" {
+  type        = number
+  description = "Maximum number of api container instances"
+  default     = 1
+}
+
+variable "jobs_runner_cpu" {
+  type        = string
+  description = "Number of vCPUs allocated to the jobs-runner container instance."
+  default     = "1000m"
+}
+
+variable "jobs_runner_memory" {
+  type        = string
+  description = "Memory to allocate to the jobs-runner container instance."
   default     = "2Gi"
 }
 
