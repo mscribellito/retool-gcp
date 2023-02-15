@@ -23,4 +23,50 @@ locals {
   database_user = "retool"
 
   retool_image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository_name}/${var.image_name}:${var.retool_version}"
+
+  env_vars = [
+    {
+      name  = "NODE_ENV"
+      value = "production"
+    },
+    {
+      name  = "POSTGRES_DB"
+      value = local.database_name
+    },
+    {
+      name  = "POSTGRES_HOST"
+      value = "/cloudsql/${module.retool_database.instance_connection_name}"
+    },
+    {
+      name  = "POSTGRES_SSL_ENABLED"
+      value = "false"
+    },
+    {
+      name  = "POSTGRES_PORT"
+      value = "5432"
+    },
+    {
+      name  = "POSTGRES_USER"
+      value = local.database_user
+    }
+  ]
+
+  env_secret_vars = [
+    {
+      name       = "POSTGRES_PASSWORD"
+      value_from = local.secret_database_password
+    },
+    {
+      name       = "JWT_SECRET"
+      value_from = local.secret_jwt_secret
+    },
+    {
+      name       = "ENCRYPTION_KEY"
+      value_from = local.secret_encryption_key
+    },
+    {
+      name       = "LICENSE_KEY"
+      value_from = local.secret_license_key
+    }
+  ]
 }
